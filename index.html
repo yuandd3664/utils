@@ -1,0 +1,124 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: yuandongdong
+ * @Date: 2019-08-05 15:43:29
+ * @LastEditors: yuandongdong
+ * @LastEditTime: 2019-08-12 14:21:17
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="sse">
+        <a href="javascript:WebSocketTest()">运行 WebSocket</a>
+    </div>
+
+    <div id="s1">s1
+        <div id="s2">s2</div>
+    </div>
+    <script type="text/javascript">
+    // s1.addEventListener('click',function(e){
+    //     console.log('s1--click')
+    // },false)
+    // s2.addEventListener('click',function(e){
+    //     console.log('s2--click')
+    // },false)
+        function WebSocketTest() {
+            if ("WebSocket" in window) {
+                alert("您的浏览器支持 WebSocket!");
+
+                // 打开一个 web socket
+                var ws = new WebSocket("ws://localhost:9998/echo");
+
+                ws.onopen = function () {
+                    // Web Socket 已连接上，使用 send() 方法发送数据
+                    ws.send("发送数据");
+                    alert("数据发送中...");
+                };
+
+                ws.onmessage = function (evt) {
+                    var received_msg = evt.data;
+                    alert("数据已接收...");
+                };
+
+                ws.onclose = function () {
+                    // 关闭 websocket
+                    alert("连接已关闭...");
+                };
+            } else {
+                // 浏览器不支持 WebSocket
+                alert("您的浏览器不支持 WebSocket!");
+            }
+        }
+
+//         function getBeforeDate(n) {
+//         var n = n;
+//         var d = new Date();
+//         var year = d.getFullYear();
+//         var mon = d.getMonth() + 1;
+//         var day = d.getDate();
+//         if(day <= n) {
+//             if(mon > 1) {
+//                 mon = mon - 1;
+//             } else {
+//                 year = year - 1;
+//                 mon = 12;
+//             }
+//         }
+//         d.setDate(d.getDate() - n);
+//         year = d.getFullYear();
+//         mon = d.getMonth() + 1;
+//         day = d.getDate();
+//         s = year + "-" + (mon < 10 ? ('0' + mon) : mon) + "-" + (day < 10 ? ('0' + day) : day);
+//         return s;
+//     }
+// console.log(getBeforeDate(1));//昨天的日期  
+//   console.log(getBeforeDate(60));//前七天的日期  
+
+
+// var obj = {data:{a:1,b:2,c:3}};
+// var obj = {a:1,b:2,c:3}
+// console.log(obj)
+// console.log(JSON.stringify(obj))
+// console.log(JSON.parse(JSON.stringify(obj)))
+    // var newObj = JSON.parse(JSON.stringify(obj));
+    // // newObj.data.a = 10;
+    // newObj.a = 10
+    // console.log(obj);//{a: 1, b: 2, c: 3}
+    // console.log(newObj);//{a: 10, b: 2, c: 3}
+
+
+    // var str1 = 'they are students'
+    // var str2 = 'aeiou'
+
+    // for(let i = 0;i < str2.length;i++){
+    //     // console.log(str2[i]);
+    //    str1 = str1.split(str2[i]).join('')
+    // }
+    // console.log(str1)
+
+    // let res = ''
+    // for(var i = 0;i < str1.length;i ++){
+    //     let flag = true
+    //     for (var j = 0;j< str2.length;j++){
+    //         if(str1[i] == str2[j]){
+    //             flag = false
+    //         }
+    //     }
+    //     if(flag) {
+    //         res += str1[i]
+    //     }
+    // }
+    // console.log(res)
+</script>
+</body>
+
+</html>

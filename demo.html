@@ -1,0 +1,328 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: yuandongdong
+ * @Date: 2019-06-19 09:46:58
+ * @LastEditors: yuandongdong
+ * @LastEditTime: 2019-08-22 17:01:20
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试</title>
+</head>
+
+<body>
+    <button id="last-week" title="是上一周啊">上一周</button><button id="next-week">下一周</button>
+    <table id="monitor">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        // function getWeek(ele) {
+        // var cells = ele;
+        // var clen = cells.length;
+        //     var currentFirstDate;
+        //     function formatDate(date) {
+        //         let year = date.getFullYear() + '-';
+        //         let month = ((date.getMonth() + 1).toString().length === 1 ? "0" + (parseInt(date.getMonth()
+        //             .toString(), 10) + 1) : (date.getMonth() + 1)) + '-';
+        //         let day = date.getDate().toString().length === 1 ? "0" + date.getDate() : date.getDate();
+        //         let week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][date.getDay()]
+        //         return week + '<br>' + month + day;
+        //     };
+
+        //     function addDate(date, n) {
+        //         date.setDate(date.getDate() + n);
+        //         return date;
+        //     };
+
+        //     function setDate(date) {
+        //         let week = date.getDay() - 1;
+        //         date = addDate(date, week * -1);
+        //         currentFirstDate = new Date(date);
+        //         for (let i = 0; i < clen; i++) {
+        //             cells[i].innerHTML = formatDate(i == 0 ? date : addDate(date, 1));
+        //         }
+        //     };
+        //     setDate(new Date());
+
+        //     // }
+        //     function lastWeek() {
+        //         return setDate(addDate(currentFirstDate, -7));
+        //     }
+
+        //     function nextWeek() {
+        //         return setDate(addDate(currentFirstDate, 7));
+
+        //     }
+        //     // }
+        //     document.getElementById('next-week').onclick = function () {
+        //         nextWeek()
+        //     }
+        //     document.getElementById('last-week').onclick = function () {
+        //         lastWeek()
+        //     }
+        // }
+
+        // getWeek(document.getElementById('monitor').getElementsByTagName('td'))
+        // let cells = document.getElementById('monitor').getElementsByTagName('td');
+        // let clen = cells.length;
+        // let currentFirstDate;
+        // function formatDate(date){             
+        //     let year = date.getFullYear()+'-';
+        //     let month = ((date.getMonth()+1).toString().length === 1 ? "0" + (parseInt(date.getMonth()
+        //         .toString(), 10) + 1) : (date.getMonth() + 1)) + '-';
+        //     let day = date.getDate().toString().length === 1 ? "0" + date.getDate() : date.getDate();
+        //     let week = ['周日','周一','周二','周三','周四','周五','周六'][date.getDay()]  
+        //     return week+'<br>'+month+day;
+        // };
+        // function addDate(date,n){       
+        //     date.setDate(date.getDate()+n);        
+        //     return date;
+        // };
+        // function setDate(date){             
+        //     let week = date.getDay()-1;
+        //     date = addDate(date,week*-1);
+        //     currentFirstDate = new Date(date);
+        //     for(let i = 0;i<clen;i++){                 
+        //         cells[i].innerHTML = formatDate(i==0 ? date : addDate(date,1));
+        //     }                
+        // };          
+        // setDate(new Date()); 
+
+        // function lastWeek(){
+        //     return setDate(addDate(currentFirstDate,-7)); 
+        // }
+        // function nextWeek(){
+        //     return setDate(addDate(currentFirstDate,7));
+        // }
+
+        // document.getElementById('last-week').onclick = function(){
+        //     setDate(addDate(currentFirstDate,-7));         
+        // };             
+        // document.getElementById('next-week').onclick = function(){                 
+        //     setDate(addDate(currentFirstDate,7));
+        // };     
+
+
+
+        // function nextMonthLastDay() { //日期显示为次月最后一天
+        //     var time = new Date();
+        //     var year = time.getFullYear();
+        //     //var year = 1900; //用于测试
+        //     var month = time.getMonth() + 2;((date.getMonth()+1).toString().length === 1 ? "0" + (parseInt(date.getMonth()
+        //         .toString(), 10) + 1) : (date.getMonth() + 1))
+        //     //var month = 0 + 2; //用于测试
+        //     if (month > 12) {
+        //         month = month - 12;
+        //         year = year + 1;
+        //     }
+        //     var day = nextMonthDay(year, month);
+        //     return year + '-' + month + '-' + day;
+        // }
+        // function nextMonthDay(year, month) { //判断每月多少天
+        //     var day31 = [1, 3, 5, 7, 8, 10, 12];
+        //     var day30 = [4, 6, 9, 11];
+        //     if (day31.indexOf(month) > -1) {
+        //         return 31;
+        //     } else if (day30.indexOf(month) > -1) {
+        //         return 30;
+        //     } else {
+        //         if (isLeapYear(year)) {
+        //             return 29;
+        //         } else {
+        //             return 28;
+        //         }
+        //     }
+        // }
+        // function isLeapYear(year) { //判断是否为闰年
+        //     return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
+        // }
+        // console.log(nextMonthLastDay())
+
+        // function getWhichDay(date) {
+        //     let weekDay = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+        //     let myDate = new Date(Date.parse(date)).getDay();
+        //     return weekDay[myDate]
+        // }
+        // console.log(getWhichDay('2019-06-22'))
+
+
+        // new Promise((resolve,reject)=>{
+        //     resolve({
+        //         name:'第一个值'
+        //     })
+        // }).then((result)=>{
+        //     console.log(result);
+
+        //     return new Promise((resolve,reject)=>{
+        //         setTimeout(()=>{
+        //             console.log(2,result)
+        //             resolve({
+        //                 name:'第2个传递的值'
+        //             })
+        //         },1000)
+        //     })
+        // }).then((result)=>{
+        //     console.log(result)
+        // })
+
+
+        // new Promise((resolve,reject)=>{
+        //     resolve({
+        //         name:'第一个值'
+        //     })
+        // }).then((res)=>{
+        //     console.log(res)
+        //     return new Promise((resolve,reject)=>{
+        //         resolve({
+        //             name:'第二个值'
+        //         })
+        //     }).then((res)=>{
+        //         console.log(res)
+        //     })
+        // }).then((res)=>{
+        //     console.log(res)
+        // })
+
+        // function isWeekEnd(date) {
+        //     if ("天一二三四五六".charAt(new Date(date).getDay()) == "天") return true;
+        //     if ("天一二三四五六".charAt(new Date(date).getDay()) == "六") return true;
+        // }
+        // console.log(isWeekEnd("2019-07-13"))
+
+        //         var date = new Date();
+        //         var date1 = new Date();
+        //         var YesterdayDate = date1.setTime(date1.getTime() - 24 * 60 * 60 * 1000)
+        //         var year = date.getFullYear();
+        //         var year1 = date1.getFullYear();
+        //         var month = date.getMonth() + 1;
+        //         var nextmonth = date.getMonth() + 2;
+        //         var month1 = date1.getMonth() + 1;
+        //         var strDate = date.getDate();
+        //         getNowDate = function () {
+        //             return year + "-" + month + "-" + strDate;
+        //         }
+        //         if (month >= 1 && month <= 9) {
+        //   month = "0" + month;
+        // }
+        // if (strDate >= 0 && strDate <= 9) {
+        //   strDate = "0" + strDate;
+        // }
+        // if (month1 >= 1 && month1 <= 9) {
+        //   month1 = "0" + month1;
+        // }
+        // if (nextmonth >= 1 && nextmonth <= 9) {
+        //   nextmonth = "0" + nextmonth;
+        // }
+        // if (strDate1 >= 0 && strDate1 <= 9) {
+        //   strDate1 = "0" + strDate1;
+        // }
+        // function isWeekEnd(date) {
+        //     if ("天一二三四五六".charAt(new Date(date).getDay()) == "天") {
+        //         return true
+        //     } else if ("天一二三四五六".charAt(new Date(date).getDay()) == "六") {
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // }
+        // console.log(isWeekEnd(getNowDate()),getNowDate())
+        // console.log(isWeekEnd('2019-07-11'))\\
+
+        // let data = '{"a":true,"b":"one","c":"12324123"}'
+        // console.log(JSON.parse(data))
+
+        // let arr = [1,3,4,5,6,7]
+        // console.log(arr.indexOf(2))
+
+        // var arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        // var num = arr.length / 6
+        // var newArr =[]
+        // for (var i = 0; i < 6; i++) {
+        //     var spliceArr = arr.splice(0, num)
+        //     newArr.push(spliceArr[0])
+        // }
+        // console.log(newArr)
+
+        // let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+        // let newArr = [];
+        // // let newestArr = []
+        // let firstData = arr[0]
+        // let lastData = arr[arr.length - 1]
+        // arr.shift()
+        // arr.pop()
+        // let num = arr.length / 3
+        // for(let i = 0;i<3;i++){
+        //     let spliceArr = arr.splice(0,num)
+        //     newArr.push(spliceArr[spliceArr.length-1])
+        // }
+        // newArr.unshift(firstData)
+        // newArr.push(lastData)
+        // console.log(newArr)
+        //     let array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+        // var result = [];
+        // for (var x = 0; x < Math.ceil(array.length / 3); x++) {
+        //     var start = x * 3;
+        //     var end = start + 3;
+        //     result.push(array.slice(start, end));
+        // }
+        // console.log(result)
+
+
+
+
+        // function getLocalTime(){     	//获取时间
+        // 	var date=new Date();
+        // 	var year=date.getFullYear();
+        // 	var month=date.getMonth();
+        // 	var day=date.getDate();
+        //     var hour=date.getHours();
+        //     var minute=date.getMinutes();
+        //     var second=date.getSeconds();
+        //     //这样写显示时间在1~9会挤占空间；所以要在1~9的数字前补零;
+        //     if (hour<10) {
+        //     	hour='0'+hour;
+        //     }
+        //     if (minute<10) {
+        //     	minute='0'+minute;
+        //     }
+        //     if (second<10) {
+        //     	second='0'+second;
+        //     }
+        //     var x=date.getDay();//获取星期
+        //     var time=year+'-'+month+'-'+day+' '+hour+':'+minute
+        //     //   tew.innerHTML=time;//将时间显示在div内
+        //       console.log(x,time)
+        // }
+        // getLocalTime();
+        // var cc = 2;
+        // function isStatic(value) {
+        //     return (
+        //         typeof value === 'string' ||
+        //         typeof value === 'number' ||
+        //         typeof value === 'boolean' ||
+        //         typeof value === 'undefined' ||
+        //         value === null
+        //     )
+        // }
+        // console.log(isStatic(cc))
+
+        console.log(typeof(null))
+    </script>
+</body>
+
+</html>

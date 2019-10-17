@@ -1,0 +1,331 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: yuandongdong
+ * @Date: 2019-05-29 11:08:01
+ * @LastEditors: yuandongdong
+ * @LastEditTime: 2019-08-16 14:52:34
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试</title>
+</head>
+
+<body>
+    哈s
+    <div>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+    </div>
+    <div style="font-size:12px;transform: scale(0.9)">我是好人</div>
+    <div id="box" style="font-size:8px;">这是一句话</div>
+    <P></P>
+    <p style="width:100px;height:100px;display:inline-block">确认过眼神你是对的人本书内容详实一道文档说明说只等有大量作者的实战经验由浅入深无论你是初学者还是进阶人事本书都这得一读
+    </p>
+    <script>
+        // let nodes = document.getElementsByTagName('button')
+        // for (let i = 0;i < nodes.length;i++){
+        //     nodes[i].addEventListener('click',function(){
+        //         console.log("nidianjile"+i)
+        //     })
+        // }
+        // function User(){
+        //     console.log(this)
+        //     this.name='dong'
+        //     function NewUser(){
+        //         // console.log(this)
+        //         return this.name="yuan"
+        //     }
+        // }
+        // let a = new User()
+        // console.log(a.name)
+
+        // let name = "world";
+        // (function(){
+        //     if(typeof name === 'undefined'){
+        //         let name = 'jack'
+        //         console.log('goodbye'+name)     //goodbye jack
+        //     }else{
+        //         console.log('hello'+name)
+        //     }
+        // })()
+
+        // function foo(x){
+        //     let tmp = 3;
+        //     return function(y){
+        //         alert(x+y+(++tmp))      //16
+        //     }
+        // }
+        // let bar = foo(2);
+        // bar(10)
+
+        // console.log(1)
+        // new Promise((resolve,reject)=>{
+        //     setTimeout(()=>{
+        //         resolve(false)
+        //     },0)
+        // }).then(()=>{
+        //     console.log(2)
+        // },()=>{
+        //     console.log(3)
+        // })
+        // console.log(4)
+        // //1  4  2
+
+        // let tt = 'aa'
+        // function test(){
+        //     alert(tt)   //undefined
+        //     let tt = 'dd'
+        //     alert(tt)   //dd
+        // }
+        // test()
+
+        //数组嵌套数组遍历
+        // let arr = [1,2,3,[4,[5,[6],7],8,9]];
+        // let arr2 = arr.toString();
+        // let arr3 = arr2.split(",");
+        // let arr4 = [];
+        // for(let i in arr3){
+        //     arr4.push(parseInt(arr3[i]))
+        //     // if(isNaN(parseInt(arr3[i]))){
+        //     //     arr4.push(arr3[i]);
+        //     // }else{
+        //     //     arr4.push(parseInt(arr3[i]));
+        //     // }
+        // }
+        // console.log(arr2);
+        // console.log(arr3);
+        // console.log(arr4);
+
+        // let date1 = new Date();
+        // let date2 = new Date(date1);
+        // date2.setDate(date1.getDate() + 30);
+        // function getLocalTime(){
+        //     return date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-" + date1.getDate()
+        // }
+        // function getOneMonthTime(){
+        //     return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate()
+        // }
+        // console.log(getLocalTime(),getOneMonthTime());
+
+        // console.log()
+        // console.log();
+        // function getNowFormatDate() {
+        //     let date = new Date();
+        //     let year = date.getFullYear();
+        //     let month = date.getMonth() + 1;
+        //     let strDate = date.getDate();
+        //     if (month >= 1 && month <= 9) {
+        //         month = "0" + month;
+        //     }
+        //     if (strDate >= 0 && strDate <= 9) {
+        //         strDate = "0" + strDate;
+        //     }
+        //     let currentdate = year + "-" + month + "-" + strDate;
+        //     return currentdate;
+        // }
+        // console.log(getNowFormatDate())
+
+        // let date_ = new Date();
+        // let year = date_.getFullYear();
+        // let month = date_.getMonth() + 1;
+        // let day = new Date(year,month,0);    
+        // if (month >= 1 && month <= 9) {
+        //     month = "0" + month;
+        // }
+        // let lastdate = year + '-' + month + '-' + day.getDate();
+        // console.log(lastdate)
+        //         function getYesterdayDate(){
+        //             let day1 = new Date();
+        //         let day2 = day1.setTime(day1.getTime()-24*60*60*1000);
+        //         return day1.getFullYear()+"-" + (day1.getMonth()+1) + "-" + day1.getDate();
+        //         }
+
+        //  console.log(getYesterdayDate())
+
+        //         let date = new Date();
+        //         let YesterdayDate = date.setTime(date.getTime()-24*60*60*1000)
+        //         let year = date.getFullYear();
+        //         let month = date.getMonth() + 2;
+        //         let strDate = date.getDate();
+        // var day = new Date(year, month, 0);
+
+        //         if (month >= 1 && month <= 9) {
+        //           month = "0" + month;
+        //         }
+        //         if (strDate >= 0 && strDate <= 9) {
+        //           strDate = "0" + strDate;
+        //         }
+        //         function getYesterdayDate(){
+        //           return year + "-" + month + "-" + day.getDate();
+        //         }
+        //         console.log(getYesterdayDate())
+
+
+        // let a = 1;
+        // let b;
+        // function test(){
+        //   return a?a:'--'
+        // }
+        // console.log(test())
+
+
+        //判断是否为质数
+        // function isPrime(number) {
+        //    if (typeof number !== 'number' || number<2) {
+        //       return false;
+        //    }
+
+        //    if (number === 2) {
+        //       return true;
+        //    } else if (number % 2 === 0) {
+        //       return false;
+        //    }
+        //    let squareRoot = Math.sqrt(number);
+
+        //    for(let i = 3; i <= squareRoot; i += 2) {
+        //       if (number % i === 0) {
+        //          return false;
+        //       }
+        //    }
+        //    return true;
+        // }
+
+        // console.log(isPrime(4))
+
+        //最大公约数
+        // function gcd( x ,  y){  
+        //         let max,min,temp;  
+        //         max = x > y ? x : y ;  
+        //         min = x < y ? x : y ;  
+        //         while( max % min ){  
+
+        //             temp = max % min;  
+        //             max = min;  
+        //             min = temp;  
+        //         }  
+        //         return min;  
+        //         }  
+        //         //最小公倍数  
+        //         function lcm(  x ,  y ){  
+        //             return x*y/gcd(x,y);  
+        //         }  
+        //         console.log(gcd(10,15),lcm(10,15))
+
+        //打印三角形
+        // for (let i = 1; i <= 15; i++) {
+        //     for (let v = 1; v < 12 - i; v++) {
+        //         document.write('&nbsp');
+        //     }
+        //     for (let j = 0; j < i; j++) {
+        //         document.write('#' + '&nbsp ');
+        //     }
+        //     document.write('<br>');
+        // }
+
+
+
+        //一个正整数有可能可以被表示为n(n>=2)个连续正整数之和，
+        // function findNum(n) {
+        //     let flag = false;
+        //     let sum;
+        //     for (let i = 1; i <= n / 2 + 1; i++){
+        //         sum = 0;
+        //         for (let j = i; j <= n / 2 + 1; j++) {
+        //             sum = sum + j;
+        //             //System.out.println(sum);
+        //             if (sum == n && sum != j) {
+        //                 for (let k = i; k <= j; k++) {
+        //                     if (k == j)
+        //                     document.write (k+'<br>')
+        //                     else
+        //                     document.write (k + " ")
+        //                     flag = true;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     if (!flag) { 
+        //         return "NONE"
+        //     }
+        // }
+        // findNum(15)
+
+        //         function getDiffDate(start, end) {
+        //             let startTime = getDate(start);
+        //             let endTime = getDate(end);
+        //             let dateArr = [];
+        //             while ((endTime.getTime() - startTime.getTime()) > 0) {
+        //                 let year = startTime.getFullYear();
+        //                 let month = startTime.getMonth().toString().length === 1 ? "0" + (parseInt(startTime.getMonth()
+        //                     .toString(), 10) + 1) : (startTime.getMonth() + 1);
+        //                 let day = startTime.getDate().toString().length === 1 ? "0" + startTime.getDate() : startTime.getDate();
+        //                 dateArr.push(year + "-" + month + "-" + day);
+        //                 // dateArr.push(day)
+        //                 startTime.setDate(startTime.getDate() + 1);
+        //             }
+        //             return dateArr;
+        //         }
+        //         function getDate(datestr) {
+        //             let temp = datestr.split("-");
+        //             if (temp[1] === '01') {
+        //                 temp[0] = parseInt(temp[0], 10) - 1;
+        //                 temp[1] = '12';
+        //             } else {
+        //                 temp[1] = parseInt(temp[1], 10) - 1;
+        //             }
+        //             let date = new Date(temp[0], temp[1], temp[2]);
+        //             return date;
+        //         }
+        //         console.info(getDiffDate('2019-06-01', '2019-06-30'));
+
+        //         function getDates() {
+        //     var new_Date = new Date()
+        //     var timesStamp = new_Date.getTime();
+        //     var currenDay = new_Date.getDay();
+        //     var dates = [];
+        //     for(var i = 0; i < 7; i++) {
+        //         dates.push(new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7)).toLocaleDateString().replace(/[年月]/g, '').replace(/[日上下午]/g, ''));
+        //     }
+        //     return dates
+        // }
+        // console.log(getDates())
+
+
+        // var storage = window.localStorage;
+        // if (!storage) {
+        //     alert("浏览器不支持localstorage");
+        //     return false;
+        // } else {
+        //     //主逻辑业务
+            
+        // //1、往localStorage插入值或者修改，key-value形式：
+        // storage.setItem('name', '张三');
+        // //或者
+        // storage.name = '张三';
+        // //或者
+        // storage["name"] = '张三';
+        // //2、获取localStorage中的值，类似map获取；
+        // var name = storage.getItem('name');
+        // //或者
+        // var name = storage.name;
+        // //或者
+        // var name = storage["name"];
+        // //3.删除
+        // storage.clear(); //清除所有的数据
+        // storage.removeItem("a"); //清除指定的数据
+        // }
+
+        let s = 'vnibviaksbf'
+        console.log(s.substring(0,1))
+    </script>
+</body>
+
+</html>
