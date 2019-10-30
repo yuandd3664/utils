@@ -31,25 +31,25 @@
     <script>
       var data = [
         {
-          amount: 20,
+          // amount: 20,
           ratio: 0.1,
           memo: "学习",
           const: "const"
         },
         {
-          amount: 100,
+          // amount: 100,
           ratio: 0.5,
           memo: "睡觉",
           const: "const"
         },
         {
-          amount: 10,
+          // amount: 10,
           ratio: 0.05,
           memo: "吃饭",
           const: "const"
         },
         {
-          amount: 30,
+          // amount: 30,
           ratio: 0.15,
           memo: "讲礼貌",
           const: "const"
@@ -87,7 +87,7 @@
         label2: function label2(data) {
           return {
             fill: "#000000",
-            text: "￥" + data.amount.toFixed(2),
+            text: "￥" + data.ratio.toFixed(2),
             fontWeight: 500,
             fontSize: 10
           };
@@ -103,7 +103,32 @@
 
       // 绘制内阴影
 
-      chart.get("canvas").draw();
+      // chart.get("canvas").draw();
+
+      let obj = {
+        cal_date_name: "2019年报业绩预告",
+        notice_nums: 615,
+        other: "131-其他",
+        pre_top1: "305-经营计划",
+        pre_top2: "123-预增",
+        pre_top3: "56-预亏",
+        update_time: "2019-10-29 08:01:02.0"
+      };
+      let arr = [];
+      for (var key in obj) {
+        if (
+          key === "other" ||
+          key === "pre_top1" ||
+          key === "pre_top2" ||
+          key === "pre_top3"
+        ) {
+          let temp = {};
+          let tempArr = obj[key].split("-");
+          temp[tempArr[1]] = tempArr[0];
+          arr.push(temp);
+        }
+      }
+      console.log(arr);
     </script>
   </body>
 </html>
