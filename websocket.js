@@ -65,3 +65,48 @@ export function sendPing() {
     Socket.send('ping')
   }, 5000)
 }
+
+//简单版
+let Socket = null;
+
+function createSocket() {
+  if (!Socket) {
+    console.log('开始建立websocket连接')
+    //判断浏览器是否支持websocket
+    if('WebSocket' in window){
+      Socket = new WebSocket('ws://192.168.115.141:8033/websocket');
+    }
+    Socket.onopen = onopenWS
+    Socket.onmessage = onmessageWS
+    Socket.onerror = onerrorWS
+    Socket.onclose = oncloseWS
+  } else {
+    console.log('websocket已连接')
+  }
+}
+//打开websocket
+function onopenWS(event) {
+  console.log('websocket连接成功');
+}
+//接收到ws的消息统一处理
+function onmessageWS(e) {
+  // console.log(e.data)
+  let responseData = JSON.parse(e.data)
+  window.dispatchEvent(new CustomEvent('onmessageWS', {
+    detail: {
+      data: responseData
+    }
+  }))
+}
+//关闭websocket
+function oncloseWS(event) {
+  console.log("websocket已断开");
+}
+//连接失败重连
+function onerrorWS(event) {
+  console.log("websocket通信发生错误");
+  createSocket()
+}
+
+
+
