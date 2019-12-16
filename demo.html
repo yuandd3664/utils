@@ -13,6 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>测试</title>
+
+    <style>
+      ul,li{
+        list-style: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -29,7 +35,8 @@
         <td></td>
       </tr>
     </table>
-
+    缺陷类型:<div id="fault-type"></div>
+    缺陷位置：<div id="defect-location"></div>
     <script>
       // function getWeek(ele) {
       // var cells = ele;
@@ -314,7 +321,88 @@
       // }
       // console.log(isStatic(cc))
 
-      console.log(typeof null);
+      // console.log(typeof null);
+      let defectTypes = []
+      let numFlag = true
+      let spanStr = '';
+      let defectStr = '';
+      let defectName = ''
+      let defectNames = ''
+      let allData = {
+        defectTypes:[{
+          defectName:'IC',
+          x:1,
+          y:1,
+          w:1,
+          h:1
+        },{
+          defectName:'E-Cap',
+          x:2,
+          y:2,
+          w:2,
+          h:2
+        },{
+          defectName:'Res',
+          x:3,
+          y:3,
+          w:3,
+          h:3
+        }]
+      }
+      defectTypes = allData.defectTypes.slice(0,2)
+      // defectTypes.forEach(ele=>{
+      //   console.log(ele.defectName)
+      //   defectNames = ele.defectName
+      //
+      // })
+      // for (let i = 0;i < defectTypes.length;i++) {
+      //   switch (defectTypes[i].defectName) {
+      //     case "Res":
+      //       defectName = '电阻';
+      //       break;
+      //     case "IC":
+      //       defectName = '小芯片';
+      //       break;
+      //     case "E-Cap":
+      //       defectName = '点解电容';
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      // }
+
+      if (numFlag) {
+        for (let i = 0; i < defectTypes.length; i++) {
+          switch (defectTypes[i].defectName) {
+            case "Res":
+              defectName = '电阻';
+              break;
+            case "IC":
+              defectName = '小芯片';
+              break;
+            case "E-Cap":
+              defectName = '点解电容';
+              break;
+            default:
+              break;
+          }
+          spanStr += `${defectName}<span>(${defectTypes[i].defectName})；</span>`;
+          defectStr +=
+                  `<p>${defectTypes[i].defectName}：${defectTypes[i].x}，${defectTypes[i].y}，${defectTypes[i].w}，${defectTypes[i].h}；</p>`
+          numFlag = false
+        }
+      }
+      document.getElementById('fault-type').innerHTML = spanStr;
+      document.getElementById('defect-location').innerHTML = defectStr
+
+      console.log(defectTypes)
+
+      // let arr = [1,5,9,5,45,44,888,9999,222,]
+      // console.log(arr.slice(arr.length - 2,arr.length))
+
+      var obj = {};
+      [].push.apply( obj, [ 1, 2, 3, 4 ] );
+      console.log( obj );
     </script>
   </body>
 </html>
