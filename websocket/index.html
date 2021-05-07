@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>websocket test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: "Microsoft Yahei", sans-serif, Arial;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.3);
+            position: fixed;
+            line-height: 30px;
+            height: 30px;
+            left: 0px;
+            right: 0px;
+            background-color: white;
+        }
+
+        .content {
+            background-color: #f1f1f1;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            margin-top: 30px;
+        }
+
+        .content .show-area {
+            text-align: left;
+            padding-top: 8px;
+            padding-bottom: 168px;
+        }
+
+        .content .show-area .message {
+            width: 100%;
+            padding: 5px;
+            word-wrap: break-word;
+            word-break: normal;
+        }
+
+        .content .write-area {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: #f1f1f1;
+            z-index: 10;
+            width: 100%;
+            height: 160px;
+            border-top: 1px solid #d8d8d8;
+        }
+
+        .content .write-area .send {
+            position: relative;
+            top: -28px;
+            height: 28px;
+            border-top-left-radius: 55px;
+            border-top-right-radius: 55px;
+        }
+
+        .content .write-area #name {
+            position: relative;
+            top: -20px;
+            line-height: 28px;
+            font-size: 13px;
+        }
+
+        .label-primary {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">websocket test</div>
+        <div class="content">
+            <div class="show-area"></div>
+            <div class="write-area">
+                <div>
+                    <button class="btn btn-default send" id="btn">发送</button>
+                </div>
+                <div><input name="name" id="name" type="text" placeholder="input your name"></div>
+                <div>
+                    <textarea name="message" id="message" cols="38" rows="4"
+                        placeholder="input your message..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let ws = "";
+        let timer = null;
+        let errorNum = 0;
+        // 建立连接
+        function createWebSocket() {
+            console.log(`第${errorNum}次连接`);
+            try {
+                if ("WebSocket" in window) {
+                    ws = new WebSocket(`ws://127.0.0.1:9527/server.php`);
+                }
+                ws.onopen = onopenWS;
+                ws.onmessage = onmessageWS;
+                ws.onerror = onerrorWS;
+                ws.onclose = oncloseWS;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        // 打开WS之后发送心跳
+        function onopenWS() {
+            console.log("websocket连接成功");
+            heartCheck();
+        }
+        // 发送心跳检查连接状态
+        function heartCheck() {
+            ws.send("heartCheck");
+            timer = setInterval(() => {
+                ws.send("heartCheck");
+            }, 10000);
+        }
+        // 接收数据
+        function onmessageWS(e) {
+            let res = JSON.parse(e.data);
+            console.log(JSON.stringify(res) + ' ---- ' + new Date().toLocaleString());
+            if (res.type === 'usermsg' && res.message) {
+                document.querySelector('.show-area').innerHTML += `<p class="bg-success message"><i class="glyphicon glyphicon-user"></i><span class="label label-primary">${res.name}:</span><span style="margin-left: 10px">${res.message}</span></p>`
+            }
+        }
+        // 连接失败
+        function onerrorWS() {
+            console.log('websocket连接错误');
+        }
+        // 关闭ws并重新连接
+        function oncloseWS(e) {
+            console.log("websocket关闭连接");
+            reconnect()
+        }
+        //连接失败进行重连,避免重复连接,设置最多3次
+        function reconnect () {
+            errorNum++;
+            clearInterval(timer);
+            if (errorNum <= 3) {
+                console.log("websocket重新连接。。。。");
+                createWebSocket();
+            } else {
+                destroy()
+            }
+        }
+        //断开websocekt
+        function destroy() {
+            ws.close()
+            ws = ''
+            console.log('websocket已断开');
+        }
+        //点击按钮发送消息
+        document.getElementById("btn").onclick = function () {
+            let name = document.getElementById("name").value;
+            let message = document.getElementById("message").value;
+            if (!name) {
+                alert("请输入用户名!");
+                return false;
+            }
+            if (!message) {
+                alert("发送消息不能为空!");
+                return false;
+            }
+            ws.send(JSON.stringify({
+                name: name,
+                message: message
+            }));
+            document.getElementById("message").value = ''
+        };
+
+        createWebSocket();
+
+    </script>
+</body>
+
+</html>
