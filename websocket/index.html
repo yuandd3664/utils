@@ -111,15 +111,17 @@
         let errorNum = 0;
         // 建立连接
         function createWebSocket() {
-            console.log(`第${errorNum}次连接`);
+            console.log(`第${errorNum}次连接====${new Date().toLocaleString('chinese', { hour12: false })}`);
             try {
                 if ("WebSocket" in window) {
                     ws = new WebSocket(`ws://127.0.0.1:9527/server.php`);
+                    ws.onopen = onopenWS;
+                    ws.onmessage = onmessageWS;
+                    ws.onerror = onerrorWS;
+                    ws.onclose = oncloseWS;
+                }else {
+                    alert("您的浏览器不支持 WebSocket!");
                 }
-                ws.onopen = onopenWS;
-                ws.onmessage = onmessageWS;
-                ws.onerror = onerrorWS;
-                ws.onclose = oncloseWS;
             } catch (error) {
                 console.log(error);
             }
@@ -134,12 +136,12 @@
             ws.send("heartCheck");
             timer = setInterval(() => {
                 ws.send("heartCheck");
-            }, 10000);
+            }, 6000);
         }
         // 接收数据
         function onmessageWS(e) {
             let res = JSON.parse(e.data);
-            console.log(JSON.stringify(res) + ' ---- ' + new Date().toLocaleString());
+            console.log(JSON.stringify(res) + ' ---- ' + new Date().toLocaleString('chinese', { hour12: false }));
             if (res.type === 'usermsg' && res.message) {
                 document.querySelector('.show-area').innerHTML += `<p class="bg-success message"><i class="glyphicon glyphicon-user"></i><span class="label label-primary">${res.name}:</span><span style="margin-left: 10px">${res.message}</span></p>`
             }
@@ -151,7 +153,9 @@
         // 关闭ws并重新连接
         function oncloseWS(e) {
             console.log("websocket关闭连接");
-            reconnect()
+            setTimeout(() => {
+                reconnect()
+            }, 3000);
         }
         //连接失败进行重连,避免重复连接,设置最多3次
         function reconnect () {
