@@ -50,6 +50,22 @@
 }
 
 nowTime(document.getElementById('ev'),12)
+
+
+
+let obj = {people:{name:{firstName: 'xxxx'}}}
+let str = 'obj.people.name.firstName'
+
+// console.log(eval(str));
+
+
+
+function fn(str) {
+    return new Function('return ' + str)();
+}
+
+console.log(fn(str))
+
   </script>
 </body>
 </html>
