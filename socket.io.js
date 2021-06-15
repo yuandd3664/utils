@@ -14,73 +14,73 @@ vars.PROTOCOLS = {
     FAST_CAPTURE_RESULT: 'fast_capture_result',
     _3D_CAPTURE_PROGRESS: '3d_capture_progress',
     _3D_CAPTURE_RESULT: '3d_capture_result',
-    GET_IC_NO_RESULT:'get_ic_no_result'
+    GET_IC_NO_RESULT: 'get_ic_no_result'
 }
 
 vars.io = {
-    on: function(eventName, eventCallback){
+    on: function (eventName, eventCallback) {
         listeners[eventName] = eventCallback
     },
-    removeAllListeners: function(eventName){
-        if(eventName){
+    removeAllListeners: function (eventName) {
+        if (eventName) {
             eventName in listeners && delete listeners[eventName]
-        }else{
+        } else {
             listeners = {}
         }
     },
-    connect:function(ws){
-        createWebSocket(Object.assign(ws,ws_common))
+    connect: function (ws) {
+        createWebSocket(Object.assign(ws, ws_common))
     },
-    destroy:function (ws) {
-        ws.destroyed=true;
+    destroy: function (ws) {
+        ws.destroyed = true;
         try {
             ws.instance.close();
-        } catch(e) {
+        } catch (e) {
             console.error(e);
         }
     }
 }
 
 let ws_common = {
-    reconnect:{
-        lock : false, //避免重复连接
+    reconnect: {
+        lock: false, //避免重复连接
         tt: null,
         interval: 1000 * 3,
     },
-    heartCheck:{
-        interval:1000 * 5,
+    heartCheck: {
+        interval: 1000 * 5,
         timeoutObj: null,
         serverTimeoutObj: null
     }
 }
 let wss = {
-    push:{
+    push: {
         instance: null,
         protocol: 'push',
-        destroyed:false,
+        destroyed: false,
     }
 }
 
-vars.io.wss=wss;
+vars.io.wss = wss;
 
 // 创建web socket
 function createWebSocket(ws) {
     try {
-        ws.instance = new WebSocket(`ws://${window.location.hostname}:${ENV.websocket_port}`,ws.protocol)
+        ws.instance = new WebSocket(`ws://${window.location.hostname}:${ENV.websocket_port}`, ws.protocol)
         initEvents(ws);
-    } catch(e) {
+    } catch (e) {
         console.error(e);
         reconnect(ws);
     }
 }
 
 // 初始化事件
-function initEvents(ws){
+function initEvents(ws) {
 
-    if(!ws.instance)
+    if (!ws.instance)
         return
 
-    ws.instance.onopen = function(){
+    ws.instance.onopen = function () {
         // heartCheck(ws);
 
         console.log(`ws(${ws.protocol}) connected`)
@@ -88,10 +88,10 @@ function initEvents(ws){
         listenerName in listeners && listeners[listenerName]()
     }
 
-    ws.instance.onmessage = function(event){
+    ws.instance.onmessage = function (event) {
         // heartCheck(ws);
 
-        if(event.data && 'ping' !== event.data){
+        if (event.data && 'ping' !== event.data) {
             try {
                 Object.defineProperty(event, "data", {
                     writable: false,
@@ -104,7 +104,7 @@ function initEvents(ws){
         }
     }
 
-    ws.instance.onclose = function(){
+    ws.instance.onclose = function () {
         console.warn(`ws(${ws.protocol}) close`)
         let listenerName = `${ws.protocol}_disconnect`
         listenerName in listeners && listeners[listenerName]()
@@ -112,7 +112,7 @@ function initEvents(ws){
         reconnect(ws);
     }
 
-    ws.instance.onerror = function(){
+    ws.instance.onerror = function () {
         console.error(`ws(${ws.protocol}) error`)
         let listenerName = `${ws.protocol}_error`
         listenerName in listeners && listeners[listenerName]()
@@ -123,11 +123,11 @@ function initEvents(ws){
 
 // 重连
 function reconnect(ws) {
-    if(ws.reconnect.lock) {
+    if (ws.reconnect.lock) {
         return;
     }
-    if(ws.destroyed){
-        ws.destroyed=false;
+    if (ws.destroyed) {
+        ws.destroyed = false;
         return;
     }
     ws.reconnect.lock = true;
@@ -142,14 +142,14 @@ function reconnect(ws) {
 
 
 //心跳检测
-function heartCheck(ws){
+function heartCheck(ws) {
     ws.heartCheck.timeoutObj && clearTimeout(ws.heartCheck.timeoutObj);
     ws.heartCheck.serverTimeoutObj && clearTimeout(ws.heartCheck.serverTimeoutObj);
-    ws.heartCheck.timeoutObj = setTimeout(function(){
+    ws.heartCheck.timeoutObj = setTimeout(function () {
         //这里发送一个心跳，后端收到后，返回一个心跳消息，
         console.log(`ws(${ws.protocol}): ping`);
         ws.instance.send("ping");
-        ws.heartCheck.serverTimeoutObj = setTimeout(function() {
+        ws.heartCheck.serverTimeoutObj = setTimeout(function () {
             console.log(`ws(${ws.protocol}): close`);
             ws.instance.close();
         }, ws.heartCheck.interval + 100);

@@ -1,134 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
-    <meta name="chart-name" content="带图例、文本的饼图" />
-    <title>F2 图表组件库 - AntV</title>
-    <link
-      rel="stylesheet"
-      href="https://gw.alipayobjects.com/os/rmsportal/YmDAMEQVbLJpVbKiRQVX.css"
-    />
-  </head>
-  <body>
-    <script>
-      /*Fixing iframe window.innerHeight 0 issue in Safari*/ document.body
-        .clientHeight;
-    </script>
 
-    <script src="https://unpkg.com/@antv/f2@3.4.2/dist/f2-all.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="chart-name" content="带图例、文本的饼图" />
+  <title>F2 图表组件库 - AntV</title>
+  <link rel="stylesheet" href="https://gw.alipayobjects.com/os/rmsportal/YmDAMEQVbLJpVbKiRQVX.css" />
+</head>
 
-    <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
-    <!-- 在 PC 上模拟 touch 事件 -->
-    <script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+<body>
+  <script>
+    /*Fixing iframe window.innerHeight 0 issue in Safari*/
+    document.body
+      .clientHeight;
+  </script>
 
-    <div class="chart-wrapper">
-      <canvas id="mountNode"></canvas>
-    </div>
-    <script>
-      var data = [
-        {
-          // amount: 20,
-          ratio: 0.1,
-          memo: "学习",
-          const: "const"
-        },
-        {
-          // amount: 100,
-          ratio: 0.5,
-          memo: "睡觉",
-          const: "const"
-        },
-        {
-          // amount: 10,
-          ratio: 0.05,
-          memo: "吃饭",
-          const: "const"
-        },
-        {
-          // amount: 30,
-          ratio: 0.15,
-          memo: "讲礼貌",
-          const: "const"
-        }
-      ];
+  <script src="https://unpkg.com/@antv/f2@3.4.2/dist/f2-all.min.js"></script>
 
-      var chart = new F2.Chart({
-        id: "mountNode",
-        pixelRatio: window.devicePixelRatio
-      });
+  <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+  <!-- 在 PC 上模拟 touch 事件 -->
+  <script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
 
-      chart.source(data);
-      chart.coord("polar", {
-        transposed: true,
-        innerRadius: 0.4,
-        radius: 0.75
-      });
-      chart.axis(false);
-      chart.legend(false);
-      chart.tooltip(false);
-      chart.guide().html({
-        position: ["50%", "50%"],
-        html:
-          '<div style="text-align: center;width:150px;height: 50px;font-size:12px">已公布家数\n<p>495</p></div>'
-      });
-      // 配置文本饼图
-      chart.pieLabel({
-        sidePadding: 75,
-        label1: function label1(data) {
-          return {
-            text: data.memo,
-            fill: "#808080"
-          };
-        },
-        label2: function label2(data) {
-          return {
-            fill: "#000000",
-            text: "￥" + data.ratio.toFixed(2),
-            fontWeight: 500,
-            fontSize: 10
-          };
-        }
-      });
-      chart
-        .interval()
-        .position("const*ratio")
-        .color("memo", ["#f00", "#000", "#00f", "#0ff"])
-        .adjust("stack")
-        .size(30);
-      chart.render();
-
-      // 绘制内阴影
-
-      // chart.get("canvas").draw();
-
-      let obj = {
-        cal_date_name: "2019年报业绩预告",
-        notice_nums: 615,
-        other: "131-其他",
-        pre_top1: "305-经营计划",
-        pre_top2: "123-预增",
-        pre_top3: "56-预亏",
-        update_time: "2019-10-29 08:01:02.0"
-      };
-      let arr = [];
-      for (var key in obj) {
-        if (
-          key === "other" ||
-          key === "pre_top1" ||
-          key === "pre_top2" ||
-          key === "pre_top3"
-        ) {
-          let temp = {};
-          let tempArr = obj[key].split("-");
-          temp[tempArr[1]] = tempArr[0];
-          arr.push(temp);
-        }
+  <div class="chart-wrapper">
+    <canvas id="mountNode"></canvas>
+  </div>
+  <script>
+    var data = [{
+        // amount: 20,
+        ratio: 0.1,
+        memo: "学习",
+        const: "const"
+      },
+      {
+        // amount: 100,
+        ratio: 0.5,
+        memo: "睡觉",
+        const: "const"
+      },
+      {
+        // amount: 10,
+        ratio: 0.05,
+        memo: "吃饭",
+        const: "const"
+      },
+      {
+        // amount: 30,
+        ratio: 0.15,
+        memo: "讲礼貌",
+        const: "const"
       }
-      console.log(arr);
-    </script>
-  </body>
+    ];
+
+    var chart = new F2.Chart({
+      id: "mountNode",
+      pixelRatio: window.devicePixelRatio
+    });
+
+    chart.source(data);
+    chart.coord("polar", {
+      transposed: true,
+      innerRadius: 0.4,
+      radius: 0.75
+    });
+    chart.axis(false);
+    chart.legend(false);
+    chart.tooltip(false);
+    chart.guide().html({
+      position: ["50%", "50%"],
+      html: '<div style="text-align: center;width:150px;height: 50px;font-size:12px">已公布家数\n<p>495</p></div>'
+    });
+    // 配置文本饼图
+    chart.pieLabel({
+      sidePadding: 75,
+      label1: function label1(data) {
+        return {
+          text: data.memo,
+          fill: "#808080"
+        };
+      },
+      label2: function label2(data) {
+        return {
+          fill: "#000000",
+          text: "￥" + data.ratio.toFixed(2),
+          fontWeight: 500,
+          fontSize: 10
+        };
+      }
+    });
+    chart
+      .interval()
+      .position("const*ratio")
+      .color("memo", ["#f00", "#000", "#00f", "#0ff"])
+      .adjust("stack")
+      .size(30);
+    chart.render();
+
+    // 绘制内阴影
+
+    // chart.get("canvas").draw();
+
+    let obj = {
+      cal_date_name: "2019年报业绩预告",
+      notice_nums: 615,
+      other: "131-其他",
+      pre_top1: "305-经营计划",
+      pre_top2: "123-预增",
+      pre_top3: "56-预亏",
+      update_time: "2019-10-29 08:01:02.0"
+    };
+    let arr = [];
+    for (var key in obj) {
+      if (
+        key === "other" ||
+        key === "pre_top1" ||
+        key === "pre_top2" ||
+        key === "pre_top3"
+      ) {
+        let temp = {};
+        let tempArr = obj[key].split("-");
+        temp[tempArr[1]] = tempArr[0];
+        arr.push(temp);
+      }
+    }
+    console.log(arr);
+  </script>
+</body>
+
 </html>

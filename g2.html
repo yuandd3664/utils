@@ -1,93 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no"
-    />
-    <meta name="chart-name" content="商品价格 7 年走势对比" />
-    <title>F2 图表组件库 - AntV</title>
-    <link
-      rel="stylesheet"
-      href="https://gw.alipayobjects.com/os/rmsportal/YmDAMEQVbLJpVbKiRQVX.css"
-    />
-  </head>
-  <body>
-    <script>
-      /*Fixing iframe window.innerHeight 0 issue in Safari*/ document.body
-        .clientHeight;
-    </script>
 
-    <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.3.8/f2.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="chart-name" content="商品价格 7 年走势对比" />
+  <title>F2 图表组件库 - AntV</title>
+  <link rel="stylesheet" href="https://gw.alipayobjects.com/os/rmsportal/YmDAMEQVbLJpVbKiRQVX.css" />
+</head>
 
-    <script src="https://gw.alipayobjects.com/os/antv/assets/lib/lodash-4.17.4.min.js"></script>
-    <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
-    <!-- 在 PC 上模拟 touch 事件 -->
-    <script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+<body>
+  <script>
+    /*Fixing iframe window.innerHeight 0 issue in Safari*/
+    document.body
+      .clientHeight;
+  </script>
 
-    <div class="chart-wrapper">
-      <canvas id="mountNode"></canvas>
-    </div>
-    <script>
-      $.getJSON(
-        "https://gw.alipayobjects.com/os/antvdemo/assets/data/f2/series-line.json",
-        function(data) {
-          var chart = new F2.Chart({
-            id: "mountNode",
-            pixelRatio: window.devicePixelRatio
-          });
-          chart.source(data);
-          chart.scale("date", {
-            type: "timeCat",
-            tickCount: 3
-          });
-          chart.scale("value", {
-            tickCount: 5
-          });
-          chart.axis("date", {
-            label: function label(text, index, total) {
-              // 只显示每一年的第一天
-              var textCfg = {};
-              if (index === 0) {
-                textCfg.textAlign = "left";
-              } else if (index === total - 1) {
-                textCfg.textAlign = "right";
+  <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.3.8/f2.min.js"></script>
+
+  <script src="https://gw.alipayobjects.com/os/antv/assets/lib/lodash-4.17.4.min.js"></script>
+  <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+  <!-- 在 PC 上模拟 touch 事件 -->
+  <script src="https://gw.alipayobjects.com/os/rmsportal/NjNldKHIVQRozfbAOJUW.js"></script>
+
+  <div class="chart-wrapper">
+    <canvas id="mountNode"></canvas>
+  </div>
+  <script>
+    $.getJSON(
+      "https://gw.alipayobjects.com/os/antvdemo/assets/data/f2/series-line.json",
+      function (data) {
+        var chart = new F2.Chart({
+          id: "mountNode",
+          pixelRatio: window.devicePixelRatio
+        });
+        chart.source(data);
+        chart.scale("date", {
+          type: "timeCat",
+          tickCount: 3
+        });
+        chart.scale("value", {
+          tickCount: 5
+        });
+        chart.axis("date", {
+          label: function label(text, index, total) {
+            // 只显示每一年的第一天
+            var textCfg = {};
+            if (index === 0) {
+              textCfg.textAlign = "left";
+            } else if (index === total - 1) {
+              textCfg.textAlign = "right";
+            }
+            return textCfg;
+          }
+        });
+        chart.tooltip({
+          custom: true, // 自定义 tooltip 内容框
+          onChange: function onChange(obj) {
+            var legend = chart.get("legendController").legends.top[0];
+            var tooltipItems = obj.items;
+            var legendItems = legend.items;
+            var map = {};
+            legendItems.map(function (item) {
+              map[item.name] = _.clone(item);
+            });
+            tooltipItems.map(function (item) {
+              var name = item.name;
+              var value = item.value;
+              if (map[name]) {
+                map[name].value = value;
               }
-              return textCfg;
-            }
-          });
-          chart.tooltip({
-            custom: true, // 自定义 tooltip 内容框
-            onChange: function onChange(obj) {
-              var legend = chart.get("legendController").legends.top[0];
-              var tooltipItems = obj.items;
-              var legendItems = legend.items;
-              var map = {};
-              legendItems.map(function(item) {
-                map[item.name] = _.clone(item);
-              });
-              tooltipItems.map(function(item) {
-                var name = item.name;
-                var value = item.value;
-                if (map[name]) {
-                  map[name].value = value;
-                }
-              });
-              legend.setItems(_.values(map));
-            },
-            onHide: function onHide() {
-              var legend = chart.get("legendController").legends.top[0];
-              legend.setItems(chart.getLegendItems().country);
-            }
-          });
-          chart
-            .line()
-            .position("date*value")
-            .color("type");
-          chart.render();
-        }
-      );
-    </script>
-  </body>
+            });
+            legend.setItems(_.values(map));
+          },
+          onHide: function onHide() {
+            var legend = chart.get("legendController").legends.top[0];
+            legend.setItems(chart.getLegendItems().country);
+          }
+        });
+        chart
+          .line()
+          .position("date*value")
+          .color("type");
+        chart.render();
+      }
+    );
+  </script>
+</body>
+
 </html>

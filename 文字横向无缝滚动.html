@@ -1,76 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <style>
-    .pad_right {
-      padding-right: 2em;
-    }
-    #scroll_div {
-      height: 26px;
-      overflow: hidden;
-      white-space: nowrap;
-      width: 535px;
-      margin-left: 10px;
-    }
-    #scroll_begin,
-    #scroll_end {
-      display: inline;
-    }
-  </style>
-  <body>
-    <div id="app">
-        {{message}}
-      <div id="scroll_div" class="fl">
-        <div id="scroll_begin">
-          <!-- <span class="pad_right">1元巨人点卡奖励</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+<style>
+  .pad_right {
+    padding-right: 2em;
+  }
+
+  #scroll_div {
+    height: 26px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 535px;
+    margin-left: 10px;
+  }
+
+  #scroll_begin,
+  #scroll_end {
+    display: inline;
+  }
+</style>
+
+<body>
+  <div id="app">
+    {{message}}
+    <div id="scroll_div" class="fl">
+      <div id="scroll_begin">
+        <!-- <span class="pad_right">1元巨人点卡奖励</span>
           <span class="pad_right">2元巨人点卡奖励</span>
           <span class="pad_right">3元巨人点卡奖励</span>
           <span class="pad_right">4元巨人点卡奖励</span>
           <span class="pad_right">5元巨人点卡奖励</span>
           <span class="pad_right">6元巨人点卡奖励</span>
           <span class="pad_right">7元巨人点卡奖励</span> -->
-          <span class="pad_right" v-for="item in items">{{item}}</span>
-        </div>
-        <div id="scroll_end"></div>
+        <span class="pad_right" v-for="item in items">{{item}}</span>
       </div>
+      <div id="scroll_end"></div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-      var app = new Vue({
-        el: "#app",
-        data: {
-          message: "Hello Vue!",
-          // items:['1元巨人点卡奖励','2元巨人点卡奖励','3元巨人点卡奖励','4元巨人点卡奖励','5元巨人点卡奖励']
-        }
-      });
-      //文字横向滚动
-      function ScrollImgLeft() {
-        var speed = 30;
-        var MyMar = null;
-        var scroll_begin = document.getElementById("scroll_begin");
-        var scroll_end = document.getElementById("scroll_end");
-        var scroll_div = document.getElementById("scroll_div");
-        scroll_end.innerHTML = scroll_begin.innerHTML;
-        function Marquee() {
-          if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
-            scroll_div.scrollLeft -= scroll_begin.offsetWidth;
-          else scroll_div.scrollLeft++;
-        }
-        MyMar = setInterval(Marquee, speed);
-        // scroll_div.onmouseover = function() {
-        //   clearInterval(MyMar);
-        // };
-        // scroll_div.onmouseout = function() {
-        //   MyMar = setInterval(Marquee, speed);
-        // };
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue!",
+        // items:['1元巨人点卡奖励','2元巨人点卡奖励','3元巨人点卡奖励','4元巨人点卡奖励','5元巨人点卡奖励']
       }
-      ScrollImgLeft();
-    </script>
-  </body>
+    });
+    //文字横向滚动
+    function ScrollImgLeft() {
+      var speed = 30;
+      var MyMar = null;
+      var scroll_begin = document.getElementById("scroll_begin");
+      var scroll_end = document.getElementById("scroll_end");
+      var scroll_div = document.getElementById("scroll_div");
+      scroll_end.innerHTML = scroll_begin.innerHTML;
+
+      function Marquee() {
+        if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
+          scroll_div.scrollLeft -= scroll_begin.offsetWidth;
+        else scroll_div.scrollLeft++;
+      }
+      MyMar = setInterval(Marquee, speed);
+      // scroll_div.onmouseover = function() {
+      //   clearInterval(MyMar);
+      // };
+      // scroll_div.onmouseout = function() {
+      //   MyMar = setInterval(Marquee, speed);
+      // };
+    }
+    ScrollImgLeft();
+  </script>
+</body>
+
 </html>
