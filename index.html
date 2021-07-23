@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* #box {
+    width: 200px;
+    height: 200px;
+    background: #eee;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+  } */
+  div {
+    width:0px;
+    height:0px;
+    border-top:10px solid red;
+    border-right:10px solid transparent;
+    border-bottom:10px solid transparent;
+    border-left:10px solid transparent;
+  }
+</style>
+
+<body>
+  <div id="box">
+
+  </div>
+  <script>
+    for(let i=0;i<5;i++){
+setTimeout(function(){
+console.log(i)
+},1000*i)
+}
+    // new Promise(function(resolve,reject){
+    //   setTimeout(() => {
+    //     reject()
+    //   }, 2000);
+    //   setTimeout(() => {
+    //     resolve()
+    //   }, 5000);
+    // }).then(function(params) {
+    //   console.log('2000');
+    // }).catch(function(params) {
+    //   console.log('catch');
+    // })
+    //     var someString = 'hi';
+    // console.log(someString[Symbol.iterator]); 
+    // let arr = [1,2,3,4,11,22,33,44]
+    // console.log(arr[Symbol.iterator]);
+    // let my = {}
+    // my[Symbol.iterator] = function *(){
+    //   yield 1
+    //   yield 2
+    //   yield 3
+    // }
+    // console.log(my);
+    // for(let i of my){
+    //   console.log(i);
+    // }
+    // let arr = [1, 2, 3, 4]
+    // for (let i in arr) {
+    //   console.log(i, arr[i]);
+    // }
+    // for (let i of arr) {
+    //   console.log(i, arr[i]);
+    // }
+    // let obj = {
+    //   a: 1,
+    //   b: 2,
+    //   c: 3
+    // }
+    // for (let i in obj) {
+    //   console.log(i);
+    // }
+    // for (let i of obj) {
+    //   console.log(i);
+    // }
+    // console.log("script start");
+    // setTimeout(function () {
+    //   console.log("setTimeout")
+    // }, 0)
+    // new Promise(resolve => {
+    //   console.log("promise start")
+    //   resolve()
+    // }).then(function () {
+    //   console.log("promise1")
+    // }).then(() => {
+    //   console.log("promise2")
+    // })
+    // console.log("script end")
+
+    //冒泡  相邻两个做比较
+    // let maoArr = [62,12,23,4,443,5,6,14]
+    // for (let i = 0; i < maoArr.length; i++) {
+    //   for (let j = 0; j < maoArr.length - i - 1; j++) {
+    //     if (maoArr[j] > maoArr[j+1]) {
+    //       let max = maoArr[j]
+    //       maoArr[j] = maoArr[j+1]
+    //       max = maoArr[j+1]
+    //     } 
+    //   }
+    // }
+    // console.log(maoArr);
+
+    //选择  遍历所有，找出最小的与第一个替换
+    // let xuanzeArr = [62, 12, 23, 4, 443, 5, 6, 14, 21, 45]
+    // for (let i = 0; i < xuanzeArr.length; i++) {
+    //   for (let j = i + 1; j < xuanzeArr.length; j++) {
+    //     if (xuanzeArr[j] < xuanzeArr[i]) {
+    //       let min = xuanzeArr[j];
+    //       xuanzeArr[j] = xuanzeArr[i];
+    //       xuanzeArr[i] = min;
+    //     }
+  //   }
+    // }
+    // console.log(xuanzeArr)
+
+    //快速（二分法）
+    // let quickArr = [62, 12, 23, 4, 443, 5, 6, 14, 21, 45, 3, 75]
+    // let left = []
+    // let right = []
+    // let mid = quickArr.splice(Math.floor(quickArr.length / 2), 1);
+    // for (var i = 0; i < quickArr.length; i++) {
+    //   if (quickArr[i] < mid) {
+    //     left.push(quickArr[i]);
+    //   } else {
+    //     right.push(quickArr[i])
+    //   }
+    // }
+    // console.log([...left, ...mid, ...right])
+  </script>
+</body>
+
+</html>

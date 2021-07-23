@@ -55,21 +55,266 @@
 
         nowTime(document.getElementById('ev'), 12)
 
+        // let obj = {
+        //     people: {
+        //         name: {
+        //             firstName: 'xxxx'
+        //         }
+        //     }
+        // }
+        // let str = 'obj.people.name.firstName'
+        // // console.log(eval(str));
+
+        // function fn(str) {
+        //     return new Function('return ' + str)();
+        // }
+
+        // console.log(fn(str))
+
+        // const dataarr = {
+        //     clusterHostSelect: [{
+        //             compType: 'Kerberos',
+        //             description: '1111',
+        //             roles: [{
+        //                     role: 'NameNode1',
+        //                     hosts: [
+        //                         //   {
+        //                         //   id: 1,
+        //                         //   bizIp: '1.1.1.1',
+        //                         //   hostname: 'host1'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.4',
+        //                         //   hostname: 'host2'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.8',
+        //                         //   hostname: 'host2'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.9',
+        //                         //   hostname: 'host2'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.10',
+        //                         //   hostname: 'host2'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.12',
+        //                         //   hostname: 'host2'
+        //                         // },
+        //                         // {
+        //                         //   id: 2,
+        //                         //   bizIp: '1.1.1.15',
+        //                         //   hostname: 'host2'
+        //                         // }
+        //                     ]
+        //                 },
+        //                 {
+        //                     role: 'NameNode2',
+        //                     hosts: []
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             compType: 'YARN',
+        //             description: '2222',
+        //             roles: [{
+        //                     role: 'DataNode1',
+        //                     hosts: [{
+        //                         id: 4,
+        //                         bizIp: '1.1.1.5',
+        //                         hostname: 'host3'
+        //                     }]
+        //                 },
+        //                 {
+        //                     role: 'DataNode2',
+        //                     hosts: [{
+        //                         id: 5,
+        //                         bizIp: '1.1.1.7',
+        //                         hostname: 'host4'
+        //                     }]
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // }
+        // console.log(dataarr.clusterHostSelect);
+        // console.log(dataarr.clusterHostSelect.map(item=>item.roles));
+        // let aaa = []
+        // dataarr.clusterHostSelect.forEach(item=>{
+        //     item.roles.forEach(item1=>{
+        //         aaa.push(item1.hosts)
+        //     })
+        // })
+        // console.log(aaa);
+        // console.log(aaa.some(item1=>item1.length > 0));
+
+        // let obj = {
+        //     a: '1',
+        //     b: '10'
+        // }
+        // let newObj = obj
+        // let newObj1 = JSON.parse(JSON.stringify(obj))
+        // let newObj2 = {...obj}
+        // let newObj3 = Object.assign({}, obj)
+        // // newObj.a = '10'
+        // // newObj1.a = '20'
+        // // newObj2.a = '30'
+        // newObj3.a = '40'
+        // console.log(obj, newObj3);
+
         let obj = {
-            people: {
-                name: {
-                    firstName: 'xxxx'
-                }
+        success: 0,
+        code: '200',
+        message: '请求成功',
+        data: [
+          {
+            ip: '20.30.66.2',
+            roles: {
+              HDFS: ['Namenode', 'DataNode']
             }
-        }
-        let str = 'obj.people.name.firstName'
-        // console.log(eval(str));
+          },
+          {
+            ip: '20.30.66.3',
+            roles: {
+              HDFS: ['Namenode', 'DataNode', 'JournalNode']
+            }
+          },
+          {
+            ip: '20.30.66.4',
+            roles: {
+              HDFS: ['JournalNode']
+            }
+          },
+          {
+            ip: '20.30.66.5',
+            roles: {
+              HDFS: ['DataNode', 'JournalNode']
+            }
+          },
+          {
+            ip: '20.30.66.6',
+            roles: {
+              HDFS: ['JournalNode']
+            }
+          },
+          {
+            ip: '192.168.0.1',
+            roles: {
+              HDFS: [
+                'DataNode',
+                'JournalNode'
+              ],
+              YARN: [
+                'ResourceManager',
+                '111'
+              ],
+              HBase: [
+                'HMaster',
+                'Hregioner'
+              ]
+            }
+          },
+        ]
+      }
 
-        function fn(str) {
-            return new Function('return ' + str)();
-        }
+      let colorList = [
+          {name: "HDFS", background: "#229BC2", color: "#fff"},
+        {name: "YARN", background: "#2FA8E7", color: "#fff"},
+        {name: "HBase", background: "#278AFF", color: "#fff"}
+      ] 
+// const a = {
+      //   ip: '20.30.66.2',
+      //   roles: [
+      //     {
+      //       name: 'HDFS',
+      //       list: [
+      //         { name: 'DataNode', color: 'ss', background: 'ff' },
+      //         { name: 'JournalNode', color: 'ss', background: 'ff' }
+      //       ]
+      //     },
+      //     {
+      //       name: 'HDFS',
+      //       list: [
+      //         { name: 'DataNode', color: 'ss', background: 'ff' },
+      //         { name: 'JournalNode', color: 'ss', background: 'ff' }
+      //       ]
+      //     }
+      //   ]
+      // }
+    // let dataArr = []
+    // obj.data.forEach(item=>{
+    //       const arrr = []
+    //       console.log(Object.keys(item.roles));
+    //       const obj = {
+    //           ip: item.ip,
+    //           roles: Object.keys(item.roles).forEach((role,i)=>{
+    //             colorList.forEach(color => {
+    //                 if (color.name === role) {
+    //                     const aobj = {
+    //                         name: role,
+    //                         ip: item.ip,
+    //                         list: Object.values(item.roles)[i].map(item=>{
+    //                             return {
+    //                                 name: item,
+    //                                 color: color.color,
+    //                                 background: color.background
+    //                             }
+    //                         }),
+    //                     }
+    //                     arrr.push(aobj)
+    //                 }
+    //             })
+    //         })
+    //     }
+    //     dataArr.push(arrr)
+    //   })
+    //   console.log(dataArr);
 
-        console.log(fn(str))
+      let dataArr = []
+      let arr =[]
+        obj.data.forEach(item=>{
+          const arrr = []
+          const obj = {
+              ip: item.ip,
+              roles: Object.keys(item.roles).forEach((role,i)=>{
+                  colorList.forEach(color => {  
+                      if (color.name === role) {
+                          const aobj = {
+                              name: role,
+                              ip: item.ip,
+                            list: Object.values(item.roles)[i].map(item=>{
+                                return {
+                                    name: item,
+                                    color: color.color,
+                                    background: color.background
+                                }
+                            }),
+                        }
+                        arrr.push(aobj)
+                    }
+                })
+            })
+          }
+        dataArr.push(arrr)
+        arr.push(obj)
+      })
+      console.log(dataArr);
+      console.log(arr);
+
+      arr.forEach(item=>{
+            const obj = {
+                ip: item.ip,
+                roles: dataArr.find(data=>data.every(ip=>ip.ip === item.ip))
+            }
+            console.log(obj);
+        })
     </script>
 </body>
 

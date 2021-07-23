@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* .wrapper {
+    white-space: pre-wrap;
+  } */
+</style>
+<body>
+  <div id="app">
+    <!-- <input v-model="message"/> -->
+    <pre v-html="ymlContent.replace(/\n/g,'<br>')" class="wrapper"></pre>
+    <!-- <button v-on:click="show">点我</button> -->
+</div>
+
+  <script src="./vue.js"></script>
+
+<script>
+  new Vue({
+      el: '#app',
+      data: {
+        ymlContent:"apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: dong1-sts\n  namespace: dong1 \n  labels:\n    app: dong1s\n  annotations:\n    describe: \"这是用于测试的dong1\"\nspec:\n  replicas: 2\n  selector:\n    matchLabels:\n      app: dong1\n  template:\n    metadata:\n      labels:\n        app: dong1\n    spec:\n      containers:\n      - name: dong1\n        image: dong1:5.7.16\n        imagePullPolicy: IfNotPresent\n        ports:\n        - containerPort: 3306\n        env:\n        - name: MYSQL_ROOT_PASSWORD\n          value: Mysql@2020\n        volumeMounts:\n        - name: dong1-data-vm\n          mountPath: /var/lib/dong1\n      volumes:\n      - name: dong1-data-vm\n        persistentVolumeClaim:\n          claimName: dong1-pvc"
+      },
+      methods:{
+          show:function(){alert("run...")}
+      }
+  })
+</script>
+</body>
+</html>

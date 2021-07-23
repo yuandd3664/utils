@@ -17,7 +17,21 @@
         border-color: transparent transparent rgba(76, 122, 254, 0.61);
     }
 
-    #blue:after {
+    #block {
+
+        width: 100px;
+        height: 100px;
+        background: pink;
+
+        position:relative;
+
+        top:50%;
+
+        left:50%;
+
+        transform: translate(-50%,-50%)
+    }
+    /* #blue:after {
         content: "";
         position: absolute;
         top: 1px;
@@ -25,12 +39,296 @@
         border-width: 0 11px 11px;
         border-style: solid;
         border-color: transparent transparent #f6f8ff;
-    }
+    } */
 </style>
 
 <body>
-    <div id="blue">
-        <div>
+    <div id="block"></div>
+    <div id="blue"></div>
+            <script>
+                //     const arr = []
+                //     arr.forEach(item=>{
+                //         console.log(item);
+                //     })
+                //    let a = arr.every(item=>{
+                //        return item.length > 0
+                //    })
+                //    console.log(a);
+                // function camelize(str) {
+                //     //补充代码
+                //     // var temp = str.split("-");
+                //     // for (var i = 1; i < temp.length; i++) {
+                //     //     temp[i] = temp[i][0].toUpperCase() + temp[i].slice(1);
+                //     // }
+                //     // return temp.join("");
+
+                //     let temp = str.split('-')
+                //     temp.forEach(item => {
+                //         item = item[0].toUpperCase() + item.slice(1)
+                //         console.log(item);
+                //     })
+                //     return temp.join('')
+                // }
+                // console.log(camelize("hello-world"))
+
+                //class
+                class Ecs {
+                    constructor() {
+                        this.instance = {
+                            id: "ecs.t1.small",
+                            region: "esc.t3.small",
+                            name: "esc.t1.large"
+                        };
+                    }
+                }
+                class RDS extends Ecs {
+                    constructor() {
+                        super();
+                        this.dbType = {
+                            id: "mysql",
+                            region: "mssql",
+                            name: "PPAS"
+                        };
+                    }
+                    config() {
+                        let newObj = {
+                            RDS: {
+                                ...this.dbType,
+                            },
+                            ECS: {
+                                ...this.instance
+                            }
+                        };
+                        return newObj;
+                    }
+                    buy(type) {
+                        let url = "https://www.aliyun.com?";
+                        let str = "";
+                        if (type == "ecs") {
+                            for (var key in this.instance) {
+                                str += "&" + key + "=" + this.instance[key];
+                            }
+                            return url + str.slice(1);
+                        } else if (type == "rds") {
+                            for (var key in this.dbType) {
+                                str += "&" + key + "=" + this.dbType[key];
+                            }
+                            return url + str.slice(1);
+                        }
+                    }
+                }
+                console.log(new RDS().config());
+                console.log(new RDS().buy("ecs"));
+                console.log(new RDS().buy("rds"))
+
+                function supertype(){
+                    this.supertype = 'true'
+                }
+                supertype.prototype.getValue = function(){
+                    return this.supertype
+                }
+                function subtype(){
+                    this.subtype = 'false'
+                }
+                subtype.prototype = new supertype()
+                let sub = new subtype()
+                console.log(sub.getValue());
+
+                function es5(...arr){
+                    // this.name = 'wjk'
+                    // this.age = 20
+                    this.arr = arr
+                }
+                function es5jc(params) {
+                    es5.apply(this, params)
+                }
+                let es5jcc = new es5jc(['22','442','4314'])
+                console.log(es5jcc);
+                function ok(a,b) {
+                    this.a = a
+                    this.b = b
+                }
+                class es6 {
+                    constructor(){
+                        this.es6obj = {name: 'wy', age: 21}
+                    }
+                }
+                class es6jc extends es6 {
+                    constructor(){
+                        super()
+                    }
+                    on(){
+                        return this.es6obj
+                    }
+                }
+                console.log(new es6jc().on());
+
+                console.log(new ok(1,2));
+                
+                class OOk {
+                    constructor() {
+                        this.obj = {
+                            a: 1,
+                            b: 2
+                        }
+                    }
+                    abd() {
+                        let newObj = {
+                            ...this.obj
+                        }
+                        return newObj
+                    }
+                }
+                class ko extends OOk {
+                    constructor() {
+                        super()
+                        this.obj1 = {
+                            c: 3,
+                            g: 7
+                        }
+                    }
+                    mm() {
+                        let nnn = {
+                            ...this.obj,
+                            ...this.obj1
+                        }
+                        return nnn
+                    }
+                }
+                console.log(new OOk().abd());
+                console.log(new ko().mm());
+
+                class Person {
+                    constructor(name, age) {
+                        this.name = name
+                        this.age = age
+                    }
+                    hello() {
+                        return this
+                    }
+                }
+                const p = new Person('a', 11)
+                console.log((p.hello()));
+
+
+                //vue数据劫持
+                let oooo = {
+                    name: 'wjk'
+                }
+                Object.keys(oooo).forEach(key => {
+                    Object.defineProperty(oooo, key, {
+                        enumerable: true,
+                        configurable: true,
+                        get: function () {
+                            console.log('get');
+                        },
+                        set: function () {
+                            console.log('set');
+                        }
+
+                    })
+                })
+                // console.log(oooo.name);
+
+                //实现一个new
+                const Son = function (name) {
+                    this.name = name
+                }
+
+                function name(fn, ...data) {
+                    let obj = {}
+                    obj.__proto__ = fn.prototype
+                    fn.apply(obj, data)
+                    return obj
+                }
+                console.log(name(Son, 'kkk'));
+
+                var A = function(){};
+                var a = new A();
+                console.log(a.__proto__); //A {}（即构造器function A 的原型对象）
+                console.log(a.__proto__.__proto__); //Object {}（即构造器function Object 的原型对象）
+                console.log(a.__proto__.__proto__.__proto__); //null
+
+
+                //判断一个数组是否包含另一个数组
+                function como(aArr, bArr) {
+                    if (!Array.isArray(aArr) || !Array.isArray(bArr)) {
+                        return false
+                    }
+                    let bStr = bArr.join(',')
+                    let tempArr = []
+                    aArr.forEach(b=>{
+                        if (bStr.indexOf(b) < 0) {
+                            tempArr.push(false)
+                        }else {
+                            tempArr.push(true)
+                        }
+                    })
+                    return tempArr.every(item => item === true)
+                }
+
+                let aArr = [2,3,1,6]
+                let bArr = {}
+                // let bArr = [1,2,3,4,5,6]
+                console.log(como(aArr, bArr));
+
+                //for in forof
+                let inarr = [11,22,33,44,55]
+                for (let i in inarr){
+                    console.log(i,inarr[i]);
+                }
+                for(let i of inarr) {
+                    console.log(i);
+                    if (i == 22) {
+                        break
+                    }
+                }
+                let inobj = {
+                    a: 11,
+                    b: 22,
+                    c: 33,
+                    d: 44,
+                    e: 55
+                }
+                for(let i in inobj) {
+                    console.log(i,inobj[i]);
+                }
+                for (let i of Object.keys(inobj)) {     //for of不能遍历对象
+                    console.log(i);
+                }
+
+                let urlStr = 'https://www.baidu.com/s?wd=js&rsv_spt=1&rsv_iqid=0xbe5f04e9000e87ae&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_dl=tb&rsv_sug3=4&rsv_sug1=3&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&prefixsug=js&rsp=5&inputT=877&rsv_sug4=2376'
+                // let newStr = urlStr.split('?')[1]
+                let newArr = urlStr.split('?')[1].split('&')
+                console.log(newArr);
+                let objarrs = []
+                const obj = {}
+                newArr.forEach(item=>{
+                   item = item.split('=')
+                    // const obj = {}
+                    obj[item[0]] = item[1]
+                    // arrs.push(obj)
+                })
+                console.log(obj); //{wd:'is',rsv_spt: 'rsv_iqid'}
+                console.log(arrs);  //[{wd:js},{rs:rf}]
+
+
+                function a(){
+                    return ()=>{
+                        return b(0)
+                        function b(i) {
+                            let fn = middleWare[i]
+                            if (!fn) {
+                                return Promise.resolve()
+                            }
+                            return Promise.resolve(function next(){
+                                return dispath(i+1)
+                            })
+                        }
+                    }
+                }
+
+            </script>
 </body>
 
 </html>
