@@ -18,12 +18,12 @@
     transform: translate(-50%, -50%)
   } */
   div {
-    width:0px;
-    height:0px;
-    border-top:10px solid red;
-    border-right:10px solid transparent;
-    border-bottom:10px solid transparent;
-    border-left:10px solid transparent;
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid red;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
   }
 </style>
 
@@ -32,11 +32,11 @@
 
   </div>
   <script>
-    for(let i=0;i<5;i++){
-setTimeout(function(){
-console.log(i)
-},1000*i)
-}
+    // for (let i = 0; i < 5; i++) {
+    //   setTimeout(function () {
+    //     console.log(i)
+    //   }, 1000 * i)
+    // }
     // new Promise(function(resolve,reject){
     //   setTimeout(() => {
     //     reject()
@@ -117,7 +117,7 @@ console.log(i)
     //       xuanzeArr[j] = xuanzeArr[i];
     //       xuanzeArr[i] = min;
     //     }
-  //   }
+    //   }
     // }
     // console.log(xuanzeArr)
 
@@ -134,6 +134,50 @@ console.log(i)
     //   }
     // }
     // console.log([...left, ...mid, ...right])
+    // let arr = [1,2,[3,4,[5,6,7,[8,9],[10]]]]
+    // function  resolve(a,b) {
+    //   return a + b
+    // }
+    // let num = 0
+    // function add(data){
+    //   data.forEach(item=>{
+    //     if (Array.isArray(item)) {
+    //       add(item)
+    //     } else {
+    //       num = resolve(num, item)
+    //       // num += item
+    //     }
+    //   })
+    //   return num
+    // }
+    // console.log(add(arr));
+
+    const arr = [1, 2, [3, 45, 67, [56]]]
+    async function add(a, b) {
+      return Promise.resolve(a + b)
+    }
+    async function sum(arr) {
+      let num = 0
+      arr.forEach(async item => {
+        if (Array.isArray(item)) {
+          num = await sum(item)
+        } else {
+          num = await add(num, item)
+        }
+      })
+      console.log(num);
+      // return num
+    }
+    sum(arr)
+    console.log(sum(arr));
+
+    
+    async function jjjjj(){
+     let a = await add(1,2)
+     console.log(a);
+    }
+    jjjjj()
+
   </script>
 </body>
 
