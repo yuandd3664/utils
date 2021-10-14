@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  div {
+    width: 100px;
+    height: 100px;
+    background: #f00;
+    margin: 100px;
+    position: fixed;
+  }
+
+  span {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: #0f0;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+  }
+</style>
+
+<body>
+  <div><span></span></div>
+  <script>
+    // let arr:Array<Number> = [1,2,3]
+    // console.info(arr)
+    // Promise.resolve().then(() => {
+    //   console.log('Promise1')
+    //   setTimeout(() => {
+    //     console.log('setTimeout2')
+    //   }, 0)
+    // })
+    // setTimeout(() => {
+    //   console.log('setTimeout1')
+    //   Promise.resolve().then(() => {
+    //     console.log('Promise2')
+    //   })
+    // })
+    const p1 = new Promise((resolve, reject) => {
+      reject('失败')
+    })
+    const p2 = new Promise((resolve, reject) => {
+      resolve('成功')
+    })
+    Promise.all([p1, p2]).then(res => {
+      console.info(res);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="text-align: center">
+    <!-- <span style="font-size: 12px; transform: scale(0.83); display: inline-block">王俊凯</span>
+    <span style="font-size: 12px">王心怡</span> -->
+    <script>
+      // const arr = [1, 2, 3, [4, 5, [6, 7, 8, [9,10,11,[90]]]]]
+      // async function add(a, b) {
+      //   return Promise.resolve(a + b)
+      // }
+      // async function sum(arr) {
+      //   let num = 0
+      //   for (let i = 0; i < arr.length; i++) {
+      //     if (Array.isArray(arr[i])) {
+      //       num += await sum(arr[i])
+      //     } else {
+      //       num = await add(num, arr[i])
+      //     }
+      //   }
+      //   return num
+      // }
+      // sum(arr).then(res=>{
+      //     console.log(res);
+      // })
+
+      // async function jjjjj() {
+      // //  let a = await add(11, 2)
+      // //  console.info(a)
+      // return await add(11, 2)
+
+      // async function asyncPrint(a,b) {
+      //   // await add(a,b);
+      //   // return await add(a,b)
+      //   console.info(await add(a,b))
+      // }
+      // asyncPrint(1,2)
+      // }
+      // console.info(await jjjjj())
+      // function add1(a,b){
+      //   return a + b
+      // }
+      // const data =  [1, 2, 3, [4, 5, [6, 7, 8, [9,10]]]]
+      // function sum1(data) {
+      //   let num = 0
+      //   data.forEach(ele => {
+      //     if (Array.isArray(ele)) {
+      //       num += sum1(ele)
+      //       console.info(num)
+      //     } else {
+      //       num = add1(num, ele)
+      //       console.info(num)
+      //     }
+      //   });
+      //   return num
+      //  }
+      //  console.info(sum1(data))
+      // if (!('a' in window)) {
+      //   var a = 100
+      // }
+      // console.info(a)
+      console.log("script start")
+
+      setTimeout(function() {
+        console.log("setTimeout")
+      }, 0);
+
+      new Promise(resolve=>{
+        console.log("promise start")
+        resolve()
+      }).then(function(){
+        console.log('promise1')
+      }).then(()=>{
+        console.log('promise2')
+      })
+      console.log("script end")
+    </script>
+  </div>
+</body>
+
+</html>
