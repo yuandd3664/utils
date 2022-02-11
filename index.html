@@ -152,31 +152,55 @@
     // }
     // console.log(add(arr));
 
-    const arr = [1, 2, [3, 45, 67, [56]]]
-    async function add(a, b) {
-      return Promise.resolve(a + b)
-    }
-    async function sum(arr) {
-      let num = 0
-      arr.forEach(async item => {
-        if (Array.isArray(item)) {
-          num = await sum(item)
-        } else {
-          num = await add(num, item)
-        }
-      })
-      console.log(num);
-      // return num
-    }
-    sum(arr)
-    console.log(sum(arr));
+    // const arr = [1, 2, [3, 45, 67, [56]]]
+    // async function add(a, b) {
+    //   return Promise.resolve(a + b)
+    // }
+    // async function sum(arr) {
+    //   let num = 0
+    //   arr.forEach(async item => {
+    //     if (Array.isArray(item)) {
+    //       num = await sum(item)
+    //     } else {
+    //       num = await add(num, item)
+    //     }
+    //   })
+    //   console.log(num);
+    //   // return num
+    // }
+    // sum(arr)
+    // console.log(sum(arr));
 
     
-    async function jjjjj(){
-     let a = await add(1,2)
-     console.log(a);
-    }
-    jjjjj()
+    // async function jjjjj(){
+    //  let a = await add(1,2)
+    //  console.log(a);
+    // }
+    // jjjjj()
+
+    const arr = [
+      {name: 'a',id:1},
+      {name: 'b',id:2},
+      {name: 'c',id:3},
+      {name: 'd',id:4},
+    ]
+    const arr1 = [
+      {configId: 1,count: 11},
+      {configId: 2,count: 22},
+      {configId: 3,count: 33},
+      {configId: 4,count: 44},
+    ]
+    let newArr = []
+    arr.forEach(item=>{
+      const obj = {
+        name: item.name,
+        id: item.id,
+        count: arr1.find(co=> co.configId === item.id).count
+      }
+      newArr.push(obj)
+    })
+    console.info(newArr)
+
 
   </script>
 </body>
